@@ -126,7 +126,7 @@ public class TitaniumBarcodeModule extends KrollModule {
 			String msg = "Problem with scanner; " + e.getMessage();
 			logError("error: " + msg);
 			if (errorCallback != null) {
-				errorCallback.callAsync(proxy.getKrollObject(),createErrorResponse(UNKNOWN_ERROR, msg));
+				errorCallback.callAsync(getKrollObject(),createErrorResponse(UNKNOWN_ERROR, msg));
 			}
 		}
 
@@ -136,13 +136,13 @@ public class TitaniumBarcodeModule extends KrollModule {
 			if (resultCode == Activity.RESULT_CANCELED) {
 				logDebug("scan canceled");
 				if (cancelCallback != null) {
-					cancelCallback.callAsync(proxy.getKrollObject(),new Object[0]);
+					cancelCallback.callAsync(getKrollObject(),new Object[0]);
 				}
 			} else {
 				logDebug("scan successful");
 				String result = data.getStringExtra(TitaniumBarcodeActivity.EXTRA_RESULT);
 				logDebug("scan result: " + result);
-				successCallback.callAsync(proxy.getKrollObject(),getDictForResult(result));
+				successCallback.callAsync(getKrollObject(),getDictForResult(result));
 			}
 		}
 	}
